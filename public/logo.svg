@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 80" width="260" height="80">
+  <!-- Dark navy background -->
+  <rect width="260" height="80" fill="#1a1d2b" rx="4"/>
+
+  <!-- FENLAND - large serif text -->
+  <text
+    x="130"
+    y="34"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="28"
+    font-weight="700"
+    letter-spacing="6"
+    fill="#d9cdb8"
+  >FENLAND</text>
+
+  <!-- Decorative line group: left line, diamond, right line -->
+  <line x1="30" y1="44" x2="108" y2="44" stroke="#d9cdb8" stroke-width="0.75" opacity="0.7"/>
+  <polygon points="130,40 134,44 130,48 126,44" fill="#d9cdb8" opacity="0.7"/>
+  <line x1="152" y1="44" x2="230" y2="44" stroke="#d9cdb8" stroke-width="0.75" opacity="0.7"/>
+
+  <!-- PROPERTY MAINTENANCE - smaller spaced text -->
+  <text
+    x="130"
+    y="62"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="10"
+    font-weight="400"
+    letter-spacing="4"
+    fill="#d9cdb8"
+    opacity="0.9"
+  >PROPERTY MAINTENANCE</text>
+</svg>
