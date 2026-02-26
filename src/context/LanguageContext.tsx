@@ -278,6 +278,10 @@ const translations: TranslationDict = {
     footerHours: { EN: 'Mon to Sat 07:00 – 18:00', PT: 'Seg. a Sáb. 07h – 18h' },
     footerRights: { EN: 'All rights reserved.', PT: 'Todos os direitos reservados.' },
     navServicearea: { EN: 'Area', PT: 'Área' }, // Used for dynamic nav generation in footer
+
+    // ─── WhatsApp Floating Button ────────────────────────────────────────────────
+    whatsappLabel: { EN: 'Support', PT: 'Atendimento' },
+    whatsappAriaLabel: { EN: 'Contact us on WhatsApp', PT: 'Fale conosco no WhatsApp' },
 };
 
 interface LanguageContextType {

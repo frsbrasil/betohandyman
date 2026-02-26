@@ -25,6 +25,7 @@ import {
     MessageSquare,
     Instagram,
     Facebook,
+    MessageCircle,
 } from 'lucide-react';
 import Navbar from './Navbar';
 import { useLanguage } from './context/LanguageContext';
@@ -33,6 +34,8 @@ import { useLanguage } from './context/LanguageContext';
 const PHONE_DISPLAY = '07384 631028';
 const PHONE_HREF = 'tel:+447384631028';
 const EMAIL = 'info@fenlandmaintenance.co.uk';
+const WHATSAPP_NUMBER = '447377521293'; // +44 7377 521293 in international format without +
+const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 const Hero = () => {
@@ -607,13 +610,32 @@ const ServiceArea = () => {
 };
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
+const NETLIFY_ENCODE = (data: Record<string, string>) =>
+    Object.keys(data)
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+        .join('&');
+
 const Contact = () => {
     const { t } = useLanguage();
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSubmitted(true);
+        setError(false);
+        const form = e.currentTarget;
+        const data: Record<string, string> = { 'form-name': 'contact' };
+        new FormData(form).forEach((val, key) => { data[key] = val as string; });
+        try {
+            await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: NETLIFY_ENCODE(data),
+            });
+            setSubmitted(true);
+        } catch {
+            setError(true);
+        }
     };
 
     return (
@@ -677,25 +699,43 @@ const Contact = () => {
                                 </p>
                             </div>
                         ) : (
-                            <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+                            <form
+                                name="contact"
+                                method="POST"
+                                data-netlify="true"
+                                data-netlify-honeypot="bot-field"
+                                className="space-y-5"
+                                onSubmit={handleSubmit}
+                            >
+                                {/* Netlify hidden fields */}
+                                <input type="hidden" name="form-name" value="contact" />
+                                <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
+
                                 <h3 className="font-serif text-xl text-neutral-900 mb-6">{t('contactFormTitle')}</h3>
+
+                                {error && (
+                                    <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
+                                        Something went wrong. Please try again or call us directly.
+                                    </div>
+                                )}
+
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div className="space-y-1.5">
                                         <label htmlFor="contact-name" className="text-sm font-medium text-neutral-700">{t('contactNameLabel')}</label>
-                                        <input id="contact-name" type="text" required className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all" placeholder={t('contactNamePlaceholder')} />
+                                        <input id="contact-name" name="name" type="text" required className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all" placeholder={t('contactNamePlaceholder')} />
                                     </div>
                                     <div className="space-y-1.5">
                                         <label htmlFor="contact-phone" className="text-sm font-medium text-neutral-700">{t('contactPhoneFormLabel')}</label>
-                                        <input id="contact-phone" type="tel" className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all" placeholder={t('contactPhonePlaceholder')} />
+                                        <input id="contact-phone" name="phone" type="tel" className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all" placeholder={t('contactPhonePlaceholder')} />
                                     </div>
                                 </div>
                                 <div className="space-y-1.5">
                                     <label htmlFor="contact-email" className="text-sm font-medium text-neutral-700">{t('contactEmailFormLabel')}</label>
-                                    <input id="contact-email" type="email" required className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all" placeholder={t('contactEmailPlaceholder')} />
+                                    <input id="contact-email" name="email" type="email" required className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all" placeholder={t('contactEmailPlaceholder')} />
                                 </div>
                                 <div className="space-y-1.5">
                                     <label htmlFor="contact-service" className="text-sm font-medium text-neutral-700">{t('contactServiceLabel')}</label>
-                                    <select id="contact-service" className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all">
+                                    <select id="contact-service" name="service" className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all">
                                         <option>{t('service1Title')}</option>
                                         <option>{t('service2Title')}</option>
                                         <option>{t('service3Title')}</option>
@@ -707,7 +747,7 @@ const Contact = () => {
                                 </div>
                                 <div className="space-y-1.5">
                                     <label htmlFor="contact-message" className="text-sm font-medium text-neutral-700">{t('contactMessageLabel')}</label>
-                                    <textarea id="contact-message" rows={4} className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all resize-none" placeholder={t('contactMessagePlaceholder')} />
+                                    <textarea id="contact-message" name="message" rows={4} className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-white text-sm transition-all resize-none" placeholder={t('contactMessagePlaceholder')} />
                                 </div>
                                 <button type="submit" className="w-full bg-neutral-900 text-white py-4 rounded-xl font-semibold text-sm hover:bg-neutral-700 transition-colors shadow-sm">
                                     {t('contactSubmitButton')}
@@ -765,10 +805,36 @@ const Footer = () => {
     );
 };
 
-// ─── Main App ────────────────────────────────────────────────────────────────
-export default function App() {
+// ─── WhatsApp Button ──────────────────────────────────────────────────────────
+const WhatsAppButton = () => {
+    const { t } = useLanguage();
     return (
-        <div className="font-sans antialiased text-neutral-900 bg-white selection:bg-neutral-900 selection:text-white">
+        <motion.a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-2xl hover:bg-[#22c35e] transition-all group"
+            aria-label={t('whatsappAriaLabel')}
+        >
+            <div className="relative">
+                <MessageCircle size={24} fill="currentColor" className="text-white" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 border-2 border-[#25D366] rounded-full animate-pulse" />
+            </div>
+            <span className="font-semibold text-sm tracking-wide">
+                {t('whatsappLabel')}
+            </span>
+        </motion.a>
+    );
+};
+
+// ─── Main App ─────────────────────────────────────────────────────────────────
+const App = () => {
+    return (
+        <div className="relative font-sans text-neutral-900 bg-white">
             <Navbar />
             <main>
                 <Hero />
@@ -782,6 +848,9 @@ export default function App() {
                 <Contact />
             </main>
             <Footer />
+            <WhatsAppButton />
         </div>
     );
-}
+};
+
+export default App;
