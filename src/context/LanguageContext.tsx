@@ -135,35 +135,23 @@ const translations: TranslationDict = {
         PT: 'Confiados por proprietários e locadores em Ely, Cambridge e Cambridgeshire.',
     },
     review1Text: {
-        EN: 'The team transformed our home with incredible attention to detail. Immaculate, quiet, and the finish on the woodwork is simply flawless. Worth every penny.',
+        EN: 'The team transformed our Victorian townhouse with incredible attention to detail. Immaculate, quiet, and the finish on the woodwork is simply flawless. Worth every penny.',
         PT: 'A equipe transformou nossa casa com uma atenção incrível aos detalhes. Imaculado, silencioso, e o acabamento na madeireira é simplesmente impecável. Valeu cada centavo.',
     },
     review1Date: { EN: '2 weeks ago', PT: 'Há 2 semanas' },
     review2Text: {
-        EN: 'Excellent maintenance service. They came to fix a leak and ended up doing a full repaint. Honest and fair pricing.',
-        PT: 'Serviço de manutenção excelente. Vieram consertar uma infiltração e acabaram fazendo toda a repintura. Honestos e preço justo.',
+        EN: 'Finding reliable tradespeople in Cambridgeshire is hard — Fenland Property Maintenance are in a league of their own. They helped us with our kitchen fitting and the result was brilliant.',
+        PT: 'Encontrar profissionais de confiança em Cambridgeshire é difícil — a Fenland Property Maintenance está em uma categoria à parte. Nos ajudaram com a instalação da cozinha e o resultado foi brilhante.',
     },
     review2Date: { EN: '1 month ago', PT: 'Há 1 mês' },
     review3Text: {
-        EN: 'Highly recommended for landlords. They take care of everything between tenant move-outs and new arrivals.',
-        PT: 'Altamente recomendados para proprietários de imóveis. Eles cuidam de tudo entre a saída de um inquilino e a entrada de outro.',
+        EN: 'Professional from the first quote to the final walkthrough. They repaired extensive water damage before painting and you would never know it was there. Highly recommended.',
+        PT: 'Profissional do primeiro orçamento até a vistoria final. Repararam danos extensos por umidade antes de pintar e você jamais diria que o problema existiu. Super recomendado.',
     },
     review3Date: { EN: '3 months ago', PT: 'Há 3 meses' },
     reviewsSource: {
         EN: 'Reviews sourced from Google Business Profile',
         PT: 'Avaliações extraídas do Google Meu Negócio',
-    },
-    review1Text: {
-        EN: 'The team transformed our Victorian townhouse with incredible attention to detail. Immaculate, quiet, and the finish on the woodwork is simply flawless. Worth every penny.',
-        PT: 'A equipe transformou nossa casa com uma atenção incrível aos detalhes. Imaculado, silencioso, e o acabamento na madeireira é simplesmente impecável. Valeu cada centavo.',
-    },
-    review2Text: {
-        EN: 'Finding reliable tradespeople in Cambridgeshire is hard — Fenland Property Maintenance are in a league of their own. They helped us with our kitchen fitting and the result was brilliant.',
-        PT: 'Encontrar profissionais de confiança em Cambridgeshire é difícil — a Fenland Property Maintenance está em uma categoria à parte. Nos ajudaram com a instalação da cozinha e o resultado foi brilhante.',
-    },
-    review3Text: {
-        EN: 'Professional from the first quote to the final walkthrough. They repaired extensive water damage before painting and you would never know it was there. Highly recommended.',
-        PT: 'Marcus Thorne: Profissional do primeiro orçamento até a vistoria final. Repararam danos extensos por umidade antes de pintar e você jamais diria que o problema existiu. Super recomendado.',
     },
     review4Text: {
         EN: 'I use them for all my rental properties. Fast, tidy, and consistently brilliant. My tenants comment on how well the properties are presented. The best trade I have ever found.',
@@ -217,10 +205,16 @@ const translations: TranslationDict = {
     servicesCTA: { EN: 'Enquire About Any Service', PT: 'Consultar Sobre Qualquer Serviço' },
 
     // ─── Service Area ─────────────────────────────────────────────────────────────
-    areaTitle: { EN: 'Where We Operate', PT: 'Onde Atuamos' },
+    areaTitle: { EN: 'Where we operate', PT: 'Onde Atuamos' },
     areaSubtitle: {
         EN: 'We are based in Ely and serve a radius of approximately 20 miles, covering the main towns and villages in Cambridgeshire.',
-        PT: 'Estamos sediados em Ely e atendemos um raio de aproximadamente 20 milhas, cobrindo as principais cidades e vilarejos de Cambridgeshire.',
+        PT: 'Com base em Ely, oferecemos serviços completos de manutenção de imóveis, incluindo pintura interna e externa, carpintaria, paisagismo, pequenos reparos e instalação de cozinhas e banheiros.',
+    },
+    areaLabel: { EN: 'Service Area', PT: 'Área de Atendimento' },
+    areaSectionLabel: { EN: 'Areas We Serve', PT: 'Áreas que Atendemos' },
+    areaFlexDesc: {
+        EN: 'Not sure if we serve your area? Give us a call. We are flexible and frequently serve the entire Fens region.',
+        PT: 'Não tem certeza se atendemos a sua área? Ligue para nós. Somos flexíveis e frequentemente atendemos por toda a região dos Fens.',
     },
     areaNoteTitle: { EN: "Don't see your town?", PT: 'Não vê sua cidade?' },
     areaNoteDesc: {
@@ -254,12 +248,29 @@ const translations: TranslationDict = {
     contactSuccessTitle: { EN: 'Submission Received!', PT: 'Mensagem Enviada!' },
     contactSuccessDesc: { EN: 'Thank you for your message. We will get back to you shortly.', PT: 'Obrigado pelo contato. Falaremos com você em breve.' },
     contactSendAnother: { EN: 'Send another message', PT: 'Enviar outra mensagem' },
+    contactFormTitle: { EN: 'Send us a message', PT: 'Envie-nos uma mensagem' },
+    contactNameLabel: { EN: 'Your Name', PT: 'Seu Nome' },
+    contactPhoneFormLabel: { EN: 'Phone Number', PT: 'Telefone' },
+    contactEmailFormLabel: { EN: 'Email Address', PT: 'E-mail' },
+    contactServiceLabel: { EN: 'Service Required', PT: 'Serviço Necessário' },
+    contactServiceOptionUnsure: { EN: 'Unsure / Other', PT: 'Não tenho certeza / Outro' },
+    contactMessageLabel: { EN: 'Your Message', PT: 'Sua Mensagem' },
+    contactSubmitButton: { EN: 'Send Message', PT: 'Enviar Mensagem' },
+    contactResponseTime: { EN: 'We usually respond within 2 hours', PT: 'Geralmente respondemos em até 2 horas' },
+    contactSuccessMessage: { EN: 'We have received your message and will call you on {phone} shortly.', PT: 'Recebemos sua mensagem e ligaremos para {phone} em breve.' },
+    contactHoursLabel: { EN: 'Working Hours', PT: 'Horário de Atendimento' },
+    contactNamePlaceholder: { EN: 'e.g. John Smith', PT: 'Ex: João Silva' },
+    contactPhonePlaceholder: { EN: 'Your contact number', PT: 'Seu número para contato' },
+    contactEmailPlaceholder: { EN: 'Email Address', PT: 'Endereço de e-mail' },
+    contactMessagePlaceholder: { EN: 'Briefly describe the service you need...', PT: 'Descreva brevemente o serviço que deseja orçar...' },
 
     // ─── Footer ──────────────────────────────────────────────────────────────────
     footerDesc: {
-        EN: 'Specialists in property maintenance, painting and renovations across Cambridgeshire. From small repairs to large updates.',
-        PT: 'Especialistas em manutenção, pintura e reformas em Cambridgeshire. De pequenos reparos a grandes renovações.',
+        EN: 'Property maintenance, handyman, painting, carpentry, kitchens, bathrooms and landscaping in Cambridgeshire.',
+        PT: 'Manutenção de imóveis, marido de aluguel, pintura, carpintaria, cozinhas, banheiros e paisagismo em Cambridgeshire.',
     },
+    footerPrivacy: { EN: 'Privacy Policy', PT: 'Política de Privacidade' },
+    footerTerms: { EN: 'Terms of Service', PT: 'Termos de Serviço' },
     footerNav: { EN: 'Navigation', PT: 'Navegação' },
     footerContact: { EN: 'Contact', PT: 'Contato' },
     footerNote: { EN: 'Serving Ely and surrounding area.', PT: 'Atendendo Ely e região.' },
@@ -272,7 +283,7 @@ const translations: TranslationDict = {
 interface LanguageContextType {
     language: Language;
     setLanguage: (lang: Language) => void;
-    t: (key: string) => string;
+    t: (key: string, params?: Record<string, string>) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -280,12 +291,18 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     const [language, setLanguage] = useState<Language>('PT'); // Default to PT as requested
 
-    const t = (key: string) => {
+    const t = (key: string, params?: Record<string, string>) => {
         if (!translations[key]) {
             console.warn(`Translation key not found: ${key}`);
             return key;
         }
-        return translations[key][language];
+        let text = translations[key][language];
+        if (params) {
+            Object.entries(params).forEach(([k, v]) => {
+                text = text.replace(`{${k}}`, v);
+            });
+        }
+        return text;
     };
 
     return (

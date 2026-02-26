@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import DottedMap from 'dotted-map';
-import { motion, AnimatePresence } from 'motion/react';
+
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Phone,
     Menu,
@@ -23,6 +23,8 @@ import {
     Building2,
     MapPin,
     MessageSquare,
+    Instagram,
+    Facebook,
 } from 'lucide-react';
 import Navbar from './Navbar';
 import { useLanguage } from './context/LanguageContext';
@@ -153,7 +155,7 @@ const HowItWorks = () => {
     ];
 
     return (
-        <section className="py-20 bg-[#faf9f6]">
+        <section className="min-h-screen flex flex-col justify-center py-20 bg-[#faf9f6]">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="text-center mb-14">
                     <h2 className="text-3xl md:text-4xl font-serif text-neutral-900 mb-4">{t('hiwTitle')}</h2>
@@ -195,7 +197,7 @@ const HowItWorks = () => {
 const LandlordCTA = () => {
     const { t } = useLanguage();
     return (
-        <section className="bg-neutral-900 py-16 md:py-20">
+        <section className="min-h-screen flex flex-col justify-center bg-neutral-900 py-16 md:py-20">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
@@ -258,7 +260,7 @@ const Gallery = () => {
     ];
 
     return (
-        <section id="gallery" className="py-24 bg-white">
+        <section id="gallery" className="min-h-screen flex flex-col justify-center py-24 bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
                     <div className="max-w-2xl">
@@ -329,7 +331,7 @@ const Reviews = () => {
     ];
 
     return (
-        <section id="reviews" className="py-24 bg-neutral-900 overflow-hidden">
+        <section id="reviews" className="min-h-screen flex flex-col justify-center py-24 bg-neutral-900 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">
@@ -411,7 +413,7 @@ const Services = () => {
     ];
 
     return (
-        <section id="services" className="py-24 bg-[#faf9f6]">
+        <section id="services" className="min-h-screen flex flex-col justify-center py-24 bg-[#faf9f6]">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
                     <div className="max-w-2xl">
@@ -450,72 +452,153 @@ const Services = () => {
     );
 };
 
-// ─── Service Area ─────────────────────────────────────────────────────────────
-const ServiceArea = () => {
-    const { t } = useLanguage();
-    const mapContainer = useRef<HTMLDivElement>(null);
-    const locations = ['Ely', 'Cambridge', 'Soham', 'Newmarket', 'Littleport', 'Chatteris', 'March', 'St Ives', 'Huntingdon'];
+// ─── Cambridgeshire Map Data ──────────────────────────────────────────────────
+const CAMBS_CITIES = [
+    { name: 'Ely', lat: 52.3996, lng: 0.2624, hub: true },
+    { name: 'Cambridge', lat: 52.2053, lng: 0.1218 },
+    { name: 'Soham', lat: 52.3339, lng: 0.3373 },
+    { name: 'Newmarket', lat: 52.2457, lng: 0.4083 },
+    { name: 'Huntingdon', lat: 52.3320, lng: -0.1836 },
+    { name: 'Littleport', lat: 52.4601, lng: 0.3046 },
+    { name: 'Burwell', lat: 52.2759, lng: 0.3263 },
+    { name: 'Fordham', lat: 52.3121, lng: 0.3868 },
+    { name: 'Sutton', lat: 52.3687, lng: -0.0263 },
+    { name: 'Chatteris', lat: 52.4564, lng: -0.0544 },
+    { name: 'St Ives', lat: 52.3298, lng: -0.0735 },
+    { name: 'March', lat: 52.5533, lng: 0.0884 },
+    { name: 'Sawston', lat: 52.1257, lng: 0.1757 },
+    { name: 'Haverhill', lat: 52.0826, lng: 0.4394 },
+    { name: 'Saffron Walden', lat: 52.0224, lng: 0.2402 },
+    { name: 'Royston', lat: 52.0477, lng: -0.0210 },
+];
 
-    const mapSvg = useMemo(() => {
-        const map = new DottedMap({ height: 60, grid: 'diagonal' });
-        map.addRegion({
-            coords: { lat: 52.398, lng: 0.262 },
-            radius: 0.35,
-            data: { type: 'service-area' },
-        });
+const LAT_MIN = 51.95, LAT_MAX = 52.60;
+const LNG_MIN = -0.30, LNG_MAX = 0.52;
 
-        return map.getSVG({
-            radius: 0.22,
-            color: '#171717',
-            shape: 'circle',
-            backgroundColor: 'transparent',
-        });
+const CambridgeshireMap = () => {
+    const W = 640, H = 420;
+
+    const project = (lat: number, lng: number) => ({
+        x: ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * W,
+        y: H - ((lat - LAT_MIN) / (LAT_MAX - LAT_MIN)) * H,
+    });
+
+    const hub = CAMBS_CITIES.find(c => c.hub)!;
+    const hubPt = project(hub.lat, hub.lng);
+
+    const curvePath = (x1: number, y1: number, x2: number, y2: number) => {
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2 - Math.abs(x2 - x1) * 0.25;
+        return `M ${x1} ${y1} Q ${mx} ${my} ${x2} ${y2}`;
+    };
+
+    const dots = useMemo(() => {
+        const pts: { cx: number; cy: number }[] = [];
+        const cols = 52, rows = 34;
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                pts.push({ cx: (c / (cols - 1)) * W, cy: (r / (rows - 1)) * H });
+            }
+        }
+        return pts;
     }, []);
 
     return (
-        <section id="service-area" className="py-24 bg-white border-y border-neutral-100 relative overflow-hidden">
+        <div className="relative w-full rounded-2xl overflow-hidden bg-[#faf9f6] border border-neutral-100 shadow-sm" style={{ aspectRatio: '640/420' }}>
+            <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full">
+                {dots.map((d, i) => (
+                    <circle key={i} cx={d.cx} cy={d.cy} r={1.2} fill="#d1d5db" opacity={0.45} />
+                ))}
+
+                {CAMBS_CITIES.filter(c => !c.hub).map((city, i) => {
+                    const { x: x2, y: y2 } = project(city.lat, city.lng);
+                    const d = curvePath(hubPt.x, hubPt.y, x2, y2);
+                    return (
+                        <motion.path
+                            key={city.name}
+                            d={d}
+                            fill="none"
+                            stroke="#9ca3af"
+                            strokeWidth={1.2}
+                            strokeDasharray="4 3"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 1 }}
+                            transition={{ duration: 1.2, delay: i * 0.06, ease: 'easeOut' }}
+                        />
+                    );
+                })}
+
+                {CAMBS_CITIES.map((city) => {
+                    const { x, y } = project(city.lat, city.lng);
+                    return (
+                        <g key={city.name}>
+                            <motion.circle
+                                cx={x} cy={y} r={city.hub ? 14 : 10}
+                                fill="none"
+                                stroke={city.hub ? '#374151' : '#6b7280'}
+                                strokeWidth={1}
+                                initial={{ scale: 0.6, opacity: 0.8 }}
+                                animate={{ scale: 1.5, opacity: 0 }}
+                                transition={{ duration: 2, repeat: Infinity, delay: Math.random() * 1.5, ease: 'easeOut' }}
+                                style={{ transformOrigin: `${x}px ${y}px` }}
+                            />
+                            <motion.circle
+                                cx={x} cy={y} r={city.hub ? 6 : 4}
+                                fill={city.hub ? '#1f2937' : '#4b5563'}
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ duration: 0.4, delay: city.hub ? 0 : 0.3 }}
+                            />
+                            <motion.text
+                                x={x + (city.hub ? 9 : 7)}
+                                y={y + 4}
+                                fontSize={city.hub ? 11 : 9}
+                                fontWeight={city.hub ? '700' : '500'}
+                                fill={city.hub ? '#111827' : '#374151'}
+                                fontFamily="serif"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.5 }}
+                            >
+                                {city.name}
+                            </motion.text>
+                        </g>
+                    );
+                })}
+            </svg>
+        </div>
+    );
+};
+
+// ─── Service Area ─────────────────────────────────────────────────────────────
+const ServiceArea = () => {
+    const { t } = useLanguage();
+
+    return (
+        <section id="service-area" className="min-h-screen flex flex-col justify-center py-24 bg-[#faf9f6] border-y border-neutral-100 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
+                        <div className="inline-flex items-center gap-2 text-neutral-500 text-sm font-medium mb-5">
+                            <MapPin size={15} className="text-neutral-400" />
+                            <span className="uppercase tracking-wider text-xs">{t('areaLabel')}</span>
+                        </div>
                         <h2 className="text-4xl md:text-5xl font-serif text-neutral-900 mb-8">{t('areaTitle')}</h2>
-                        <p className="text-lg text-neutral-500 font-light mb-10 leading-relaxed">
+                        <p className="text-lg text-neutral-500 font-light mb-8 leading-relaxed">
                             {t('areaSubtitle')}
                         </p>
+                        <p className="text-neutral-500 font-light leading-relaxed mb-10">
+                            {t('areaFlexDesc')}
+                        </p>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-6">
-                            {locations.map((loc, i) => (
-                                <div key={i} className="flex items-center gap-2 text-neutral-700">
-                                    <MapPin size={14} className="text-neutral-400" />
-                                    <span className="text-sm font-medium">{loc}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="mt-12 p-6 bg-neutral-50 rounded-2xl border border-neutral-100 flex items-start gap-4">
-                            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0 border border-neutral-100">
-                                <MapPin size={18} className="text-neutral-900" />
-                            </div>
-                            <div>
-                                <p className="text-neutral-900 font-medium text-sm mb-1">{t('areaNoteTitle')}</p>
-                                <p className="text-neutral-500 text-xs leading-relaxed">{t('areaNoteDesc')}</p>
-                            </div>
-                        </div>
+                        <a href={PHONE_HREF} className="inline-flex items-center gap-2 bg-neutral-900 text-white px-7 py-3.5 rounded-full font-medium text-sm hover:bg-neutral-700 transition-colors">
+                            <Phone size={15} /> {PHONE_DISPLAY}
+                        </a>
                     </div>
 
-                    <div className="relative">
-                        <div
-                            className="opacity-20 aspect-square w-full scale-125"
-                            dangerouslySetInnerHTML={{ __html: mapSvg }}
-                            ref={mapContainer}
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <motion.div
-                                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-                                transition={{ repeat: Infinity, duration: 4 }}
-                                className="w-48 h-48 bg-neutral-900/5 rounded-full border border-neutral-900/10"
-                            />
-                            <div className="absolute w-3 h-3 bg-neutral-900 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.3)]" />
-                        </div>
+                    <div>
+                        <p className="text-xs uppercase tracking-widest text-neutral-400 font-medium mb-5">{t('areaSectionLabel')}</p>
+                        <CambridgeshireMap />
                     </div>
                 </div>
             </div>
@@ -534,7 +617,7 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-24 bg-white">
+        <section id="contact" className="min-h-screen flex flex-col justify-center py-24 bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     <div>
@@ -643,40 +726,39 @@ const Contact = () => {
 const Footer = () => {
     const { t } = useLanguage();
     return (
-        <footer className="bg-white pt-24 pb-12 border-t border-neutral-100">
+        <footer className="bg-neutral-950 text-white py-12 md:py-16">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-                    <div className="lg:col-span-1">
-                        <p className="font-serif text-2xl font-semibold mb-6">Fenland Property Maintenance.</p>
-                        <p className="text-neutral-500 font-light text-sm leading-relaxed max-w-xs">{t('footerDesc')}</p>
+                <div className="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
+                    <div className="max-w-2xl">
+                        <p className="font-serif text-2xl font-semibold mb-4">Fenland Property Maintenance.</p>
+                        <p className="text-neutral-400 font-light text-sm leading-relaxed">{t('footerDesc')}</p>
                     </div>
-                    <div>
-                        <p className="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-6">{t('footerNav')}</p>
-                        <ul className="space-y-4">
-                            {['services', 'service-area', 'gallery', 'reviews', 'contact'].map((id, i) => (
-                                <li key={i}><a href={`#${id}`} className="text-neutral-500 hover:text-neutral-900 transition-colors text-sm">{t(`nav${id.charAt(0).toUpperCase() + id.slice(1).replace('-', '')}`)}</a></li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-6">{t('footerContact')}</p>
-                        <ul className="space-y-4">
-                            <li><a href={PHONE_HREF} className="text-neutral-500 hover:text-neutral-900 transition-colors text-sm">{PHONE_DISPLAY}</a></li>
-                            <li><a href={`mailto:${EMAIL}`} className="text-neutral-500 hover:text-neutral-900 transition-colors text-sm">{EMAIL}</a></li>
-                            <li className="text-neutral-500 text-sm italic">{t('footerNote')}</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-6">{t('footerBusiness')}</p>
-                        <ul className="space-y-4 text-sm text-neutral-500">
-                            <li>Fenland Property Maintenance Ltd.</li>
-                            <li>Registered in England & Wales</li>
-                            <li>{t('footerHours')}</li>
-                        </ul>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
+                        <a href={PHONE_HREF} className="flex items-center gap-3 group">
+                            <Phone size={18} className="text-neutral-400 group-hover:text-white transition-colors" />
+                            <span className="text-sm font-semibold tracking-wide">{PHONE_DISPLAY}</span>
+                        </a>
+                        <a href="#contact" className="bg-white text-neutral-900 px-7 py-3 rounded-full font-bold text-sm hover:bg-neutral-100 transition-all active:scale-95 shadow-lg">
+                            {t('navFreeQuote')}
+                        </a>
                     </div>
                 </div>
-                <div className="pt-12 border-t border-neutral-100 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-xs text-neutral-400">© {new Date().getFullYear()} Fenland Property Maintenance. {t('footerRights')}</p>
+                <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6 text-neutral-500">
+                    <p className="text-[11px] tracking-wide italic">
+                        © {new Date().getFullYear()} Fenland Property Maintenance. {t('footerRights')}
+                    </p>
+                    <div className="flex items-center gap-8">
+                        <div className="flex items-center gap-4 border-r border-white/10 pr-8 mr-0">
+                            <a href="https://www.instagram.com/globalinsightpartners.oficial/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
+                                <Instagram size={16} />
+                            </a>
+                            <a href="https://www.facebook.com/people/Globalinsightpartners/61570809805072/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook">
+                                <Facebook size={16} />
+                            </a>
+                        </div>
+                        <a href="#" className="text-[11px] hover:text-white transition-colors">{t('footerPrivacy')}</a>
+                        <a href="#" className="text-[11px] hover:text-white transition-colors">{t('footerTerms')}</a>
+                    </div>
                 </div>
             </div>
         </footer>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { Phone, Menu, X, Instagram, Facebook } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from './context/LanguageContext';
 
 const PHONE_DISPLAY = '07384 631028';
@@ -50,14 +50,14 @@ const Navbar = () => {
                             className={`text-xs font-bold transition-all ${language === 'EN' ? 'opacity-100 scale-110' : 'opacity-40 hover:opacity-100'} ${isScrolled ? 'text-neutral-900' : 'text-white'}`}
                             title="English"
                         >
-                            EN 🇬🇧
+                            EN
                         </button>
                         <button
                             onClick={() => setLanguage('PT')}
                             className={`text-xs font-bold transition-all ${language === 'PT' ? 'opacity-100 scale-110' : 'opacity-40 hover:opacity-100'} ${isScrolled ? 'text-neutral-900' : 'text-white'}`}
                             title="Português"
                         >
-                            PT 🇵🇹
+                            PT
                         </button>
                     </div>
 
@@ -65,6 +65,17 @@ const Navbar = () => {
                         <Phone size={15} />
                         <span>{PHONE_DISPLAY}</span>
                     </a>
+
+                    {/* Social Media Links (Desktop) */}
+                    <div className="flex items-center space-x-3 border-l border-neutral-300/30 pl-6">
+                        <a href="https://www.instagram.com/globalinsightpartners.oficial/" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isScrolled ? 'text-neutral-600 hover:text-neutral-900' : 'text-white/80 hover:text-white'}`} aria-label="Instagram">
+                            <Instagram size={17} />
+                        </a>
+                        <a href="https://www.facebook.com/people/Globalinsightpartners/61570809805072/" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isScrolled ? 'text-neutral-600 hover:text-neutral-900' : 'text-white/80 hover:text-white'}`} aria-label="Facebook">
+                            <Facebook size={17} />
+                        </a>
+                    </div>
+
                     <a href="#contact" className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${isScrolled ? 'bg-neutral-900 text-white hover:bg-neutral-700' : 'bg-white text-neutral-900 hover:bg-neutral-100'}`}>
                         {t('navFreeQuote')}
                     </a>
@@ -72,8 +83,18 @@ const Navbar = () => {
 
                 <div className="md:hidden flex items-center space-x-4">
                     <div className="flex items-center space-x-3 mr-2">
-                        <button onClick={() => setLanguage('EN')} className={`text-sm ${language === 'EN' ? 'opacity-100' : 'opacity-40'}`}>🇬🇧</button>
-                        <button onClick={() => setLanguage('PT')} className={`text-sm ${language === 'PT' ? 'opacity-100' : 'opacity-40'}`}>🇵🇹</button>
+                        <button
+                            onClick={() => setLanguage('EN')}
+                            className={`text-xs font-bold transition-all ${language === 'EN' ? 'opacity-100' : 'opacity-40'} ${isScrolled ? 'text-neutral-900' : 'text-white'}`}
+                        >
+                            EN
+                        </button>
+                        <button
+                            onClick={() => setLanguage('PT')}
+                            className={`text-xs font-bold transition-all ${language === 'PT' ? 'opacity-100' : 'opacity-40'} ${isScrolled ? 'text-neutral-900' : 'text-white'}`}
+                        >
+                            PT
+                        </button>
                     </div>
                     <button
                         className={`${isScrolled ? 'text-neutral-900' : 'text-white'}`}
@@ -99,6 +120,17 @@ const Navbar = () => {
                         <a href={PHONE_HREF} className="flex items-center space-x-2 text-neutral-900 font-semibold py-1">
                             <Phone size={16} /><span>{PHONE_DISPLAY}</span>
                         </a>
+
+                        {/* Social Media Links (Mobile) */}
+                        <div className="flex items-center space-x-5 py-2">
+                            <a href="https://www.instagram.com/globalinsightpartners.oficial/" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 transition-colors" aria-label="Instagram">
+                                <Instagram size={20} />
+                            </a>
+                            <a href="https://www.facebook.com/people/Globalinsightpartners/61570809805072/" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 transition-colors" aria-label="Facebook">
+                                <Facebook size={20} />
+                            </a>
+                        </div>
+
                         <a href="#contact" className="bg-neutral-900 text-white px-6 py-3 rounded-full font-medium text-center mt-2" onClick={() => setMobileMenuOpen(false)}>
                             {t('navMobileQuote')}
                         </a>
