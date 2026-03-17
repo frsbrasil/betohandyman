@@ -12,38 +12,35 @@ interface TranslationDict {
 const translations: TranslationDict = {
     // ─── Global ──────────────────────────────────────────────────────────────────
     brand: {
-        EN: 'Fenland Property Maintenance.',
-        PT: 'Fenland Property Maintenance.',
+        EN: 'B.F.O Property Maintenance.',
+        PT: 'B.F.O Property Maintenance.',
     },
     phoneNumber: {
         EN: '07384 631028',
         PT: '07384 631028',
     },
     email: {
-        EN: 'info@fenlandmaintenance.co.uk',
-        PT: 'info@fenlandmaintenance.co.uk',
+        EN: 'info@bfopropertymaintenance.co.uk',
+        PT: 'info@bfopropertymaintenance.co.uk',
     },
 
     // ─── Navbar ──────────────────────────────────────────────────────────────────
     navServices: { EN: 'Services', PT: 'Serviços' },
     navArea: { EN: 'Areas', PT: 'Área' },
     navGallery: { EN: 'Gallery', PT: 'Galeria' },
-    navReviews: { EN: 'Reviews', PT: 'Avaliações' },
+
     navContact: { EN: 'Contact', PT: 'Contato' },
     navFreeQuote: { EN: 'Free Quote', PT: 'Orçamento Grátis' },
     navMobileQuote: { EN: 'Get a Free Quote', PT: 'Solicitar Orçamento Grátis' },
 
     // ─── Hero ─────────────────────────────────────────────────────────────────────
-    heroSocialProof: {
-        EN: 'Rated 4.9 · 60+ Google Reviews',
-        PT: 'Avaliado em 4,9 · Mais de 60 avaliações no Google',
-    },
+
     heroTitle: {
         EN: 'Property Maintenance Across Cambridgeshire',
         PT: 'Manutenção de Imóveis em Cambridgeshire',
     },
     heroSubtitle: {
-        EN: 'Based in Ely, we carry out painting, carpentry, landscaping, handyman work and kitchen and bathroom fitting for homeowners and landlords across the fens.',
+        EN: 'Based in Ely, we carry out painting, carpentry, landscaping, handyman work and kitchen and bathroom fitting for homeowners and landlords across the Fens.',
         PT: 'Com base em Ely, oferecemos serviços completos de manutenção de imóveis, incluindo pintura interna e externa, carpintaria, paisagismo, pequenos reparos e instalação de cozinhas e banheiros.',
     },
     heroCTA: { EN: 'Get a Free Quote', PT: 'Solicitar Orçamento Grátis' },
@@ -59,8 +56,7 @@ const translations: TranslationDict = {
     credYearsSub: { EN: 'Serving Cambridgeshire', PT: 'Atendendo Cambridgeshire' },
     credTrustedTitle: { EN: 'Reliable Tradesman', PT: 'Profissional de Confiança' },
     credTrustedSub: { EN: 'Trusted Locally Since 2014', PT: 'Reconhecido Localmente Desde 2014' },
-    credStarsTitle: { EN: '4.9 Stars', PT: '4,9 Estrelas' },
-    credStarsSub: { EN: '60+ Google Reviews', PT: 'Mais de 60 Avaliações no Google' },
+
 
     // ─── How It Works ─────────────────────────────────────────────────────────────
     hiwTitle: { EN: 'Simple From Start to Finish', PT: 'Simples do Início ao Fim' },
@@ -129,30 +125,7 @@ const translations: TranslationDict = {
     galleryLabel3: { EN: 'Interior Painting, March', PT: 'Pintura de Interior, March' },
     galleryLabel4: { EN: 'Kitchen Fitting, Chatteris', PT: 'Instalação de Cozinha, Chatteris' },
 
-    reviewsTitle: { EN: 'What Our Customers Say', PT: 'O Que Nossos Clientes Dizem' },
-    reviewsSubtitle: {
-        EN: 'Trusted by homeowners and landlords across Ely, Cambridge, and Cambridgeshire.',
-        PT: 'Confiados por proprietários e locadores em Ely, Cambridge e Cambridgeshire.',
-    },
-    review1Text: {
-        EN: 'The team transformed our Victorian townhouse with incredible attention to detail. Immaculate, quiet, and the finish on the woodwork is simply flawless. Worth every penny.',
-        PT: 'A equipe transformou nossa casa com uma atenção incrível aos detalhes. Imaculado, silencioso, e o acabamento na madeireira é simplesmente impecável. Valeu cada centavo.',
-    },
-    review1Date: { EN: '2 weeks ago', PT: 'Há 2 semanas' },
-    review2Text: {
-        EN: 'Finding reliable tradespeople in Cambridgeshire is hard — Fenland Property Maintenance are in a league of their own. They helped us with our kitchen fitting and the result was brilliant.',
-        PT: 'Encontrar profissionais de confiança em Cambridgeshire é difícil — a Fenland Property Maintenance está em uma categoria à parte. Nos ajudaram com a instalação da cozinha e o resultado foi brilhante.',
-    },
-    review2Date: { EN: '1 month ago', PT: 'Há 1 mês' },
-    review3Text: {
-        EN: 'Professional from the first quote to the final walkthrough. They repaired extensive water damage before painting and you would never know it was there. Highly recommended.',
-        PT: 'Profissional do primeiro orçamento até a vistoria final. Repararam danos extensos por umidade antes de pintar e você jamais diria que o problema existiu. Super recomendado.',
-    },
-    review3Date: { EN: '3 months ago', PT: 'Há 3 meses' },
-    reviewsSource: {
-        EN: 'Reviews sourced from Google Business Profile',
-        PT: 'Avaliações extraídas do Google Meu Negócio',
-    },
+
     review4Text: {
         EN: 'I use them for all my rental properties. Fast, tidy, and consistently brilliant. My tenants comment on how well the properties are presented. The best trade I have ever found.',
         PT: 'Uso para todos os meus imóveis alugados. Rápido, organizado e consistentemente excelente. Meus inquilinos comentam sempre sobre a ótima apresentação dos imóveis. O melhor profissional que já contratei.',
@@ -208,7 +181,7 @@ const translations: TranslationDict = {
     areaTitle: { EN: 'Where we operate', PT: 'Onde Atuamos' },
     areaSubtitle: {
         EN: 'We are based in Ely and serve a radius of approximately 20 miles, covering the main towns and villages in Cambridgeshire.',
-        PT: 'Com base em Ely, oferecemos serviços completos de manutenção de imóveis, incluindo pintura interna e externa, carpintaria, paisagismo, pequenos reparos e instalação de cozinhas e banheiros.',
+        PT: 'Estamos sediados em Ely e atendemos um raio de aproximadamente 32 km, cobrindo as principais cidades e vilas de Cambridgeshire.',
     },
     areaLabel: { EN: 'Service Area', PT: 'Área de Atendimento' },
     areaSectionLabel: { EN: 'Areas We Serve', PT: 'Áreas que Atendemos' },
@@ -235,7 +208,7 @@ const translations: TranslationDict = {
     contactWhyChooseUs1: { EN: 'Free written quotes, no obligation', PT: 'Orçamentos escritos gratuitos, sem compromisso' },
     contactWhyChooseUs2: { EN: 'Fixed prices with no hidden extras', PT: 'Preços fixos sem custos ocultos' },
     contactWhyChooseUs3: { EN: 'Tidy, professional and respectful of your home', PT: 'Organizados, profissionais e respeitosos com o seu lar' },
-    contactWhyChooseUs4: { EN: 'Fully insured to £5M public liability', PT: 'Totalmente segurados com cobertura de até £5M' },
+    contactWhyChooseUs4: { EN: '', PT: '' },
     formName: { EN: 'Your Name', PT: 'Seu Nome' },
     formNamePlaceholder: { EN: 'e.g. John Smith', PT: 'Ex: João Silva' },
     formPhone: { EN: 'Phone Number', PT: 'Telefone' },
@@ -293,7 +266,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-    const [language, setLanguage] = useState<Language>('PT'); // Default to PT as requested
+    const [language, setLanguage] = useState<Language>('EN'); // Default to EN as requested
 
     const t = (key: string, params?: Record<string, string>) => {
         if (!translations[key]) {

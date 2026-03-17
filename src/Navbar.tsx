@@ -21,7 +21,7 @@ const Navbar = () => {
         { href: '#services', label: t('navServices') },
         { href: '#service-area', label: t('navArea') },
         { href: '#gallery', label: t('navGallery') },
-        { href: '#reviews', label: t('navReviews') },
+
         { href: '#contact', label: t('navContact') },
     ];
 
@@ -68,10 +68,10 @@ const Navbar = () => {
 
                     {/* Social Media Links (Desktop) */}
                     <div className="flex items-center space-x-3 border-l border-neutral-300/30 pl-6">
-                        <a href="https://www.instagram.com/globalinsightpartners.oficial/" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isScrolled ? 'text-neutral-600 hover:text-neutral-900' : 'text-white/80 hover:text-white'}`} aria-label="Instagram">
+                        <a href="#" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isScrolled ? 'text-neutral-600 hover:text-neutral-900' : 'text-white/80 hover:text-white'}`} aria-label="Instagram">
                             <Instagram size={17} />
                         </a>
-                        <a href="https://www.facebook.com/people/Globalinsightpartners/61570809805072/" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isScrolled ? 'text-neutral-600 hover:text-neutral-900' : 'text-white/80 hover:text-white'}`} aria-label="Facebook">
+                        <a href="#" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isScrolled ? 'text-neutral-600 hover:text-neutral-900' : 'text-white/80 hover:text-white'}`} aria-label="Facebook">
                             <Facebook size={17} />
                         </a>
                     </div>
@@ -123,10 +123,10 @@ const Navbar = () => {
 
                         {/* Social Media Links (Mobile) */}
                         <div className="flex items-center space-x-5 py-2">
-                            <a href="https://www.instagram.com/globalinsightpartners.oficial/" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 transition-colors" aria-label="Instagram">
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 transition-colors" aria-label="Instagram">
                                 <Instagram size={20} />
                             </a>
-                            <a href="https://www.facebook.com/people/Globalinsightpartners/61570809805072/" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 transition-colors" aria-label="Facebook">
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 transition-colors" aria-label="Facebook">
                                 <Facebook size={20} />
                             </a>
                         </div>

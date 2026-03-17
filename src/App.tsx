@@ -33,7 +33,7 @@ import { useLanguage } from './context/LanguageContext';
 // ─── Constants ───────────────────────────────────────────────────────────────
 const PHONE_DISPLAY = '07384 631028';
 const PHONE_HREF = 'tel:+447384631028';
-const EMAIL = 'info@fenlandmaintenance.co.uk';
+const EMAIL = 'info@bfopropertymaintenance.co.uk';
 const WHATSAPP_NUMBER = '447377521293'; // +44 7377 521293 in international format without +
 const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}`;
 
@@ -45,7 +45,7 @@ const Hero = () => {
             <div className="absolute inset-0 z-0">
                 <img
                     src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop"
-                    alt="Interior recently painted by Fenland Property Maintenance"
+                    alt="Interior recently painted by B.F.O Property Maintenance"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                     fetchPriority="high"
@@ -62,13 +62,6 @@ const Hero = () => {
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     className="max-w-4xl"
                 >
-                    {/* Social proof badge */}
-                    <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-5 py-2 mb-8">
-                        <div className="flex gap-0.5 text-amber-400">
-                            {[...Array(5)].map((_, i) => <Star key={i} size={13} fill="currentColor" />)}
-                        </div>
-                        <span className="text-white text-sm font-medium">{t('heroSocialProof')}</span>
-                    </div>
 
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-white leading-[1.1] tracking-tight mb-5">
                         {t('heroTitle')}
@@ -102,13 +95,13 @@ const Credentials = () => {
         { icon: <ShieldCheck size={22} className="text-neutral-700" />, title: t('credInsuredTitle'), subtitle: t('credInsuredSub') },
         { icon: <Clock size={22} className="text-neutral-700" />, title: t('credYearsTitle'), subtitle: t('credYearsSub') },
         { icon: <Award size={22} className="text-neutral-700" />, title: t('credTrustedTitle'), subtitle: t('credTrustedSub') },
-        { icon: <Star size={22} className="text-neutral-700" />, title: t('credStarsTitle'), subtitle: t('credStarsSub') },
+
     ];
 
     return (
         <section className="bg-white py-10 border-b border-neutral-100">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {items.map((item, idx) => (
                         <motion.div
                             key={idx}
@@ -256,10 +249,10 @@ const LandlordCTA = () => {
 const Gallery = () => {
     const { t } = useLanguage();
     const images = [
-        { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070&auto=format&fit=crop', alt: t('galleryLabel1'), label: t('galleryLabel1') },
-        { src: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=2070&auto=format&fit=crop', alt: t('galleryLabel2'), label: t('galleryLabel2') },
-        { src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop', alt: t('galleryLabel3'), label: t('galleryLabel3') },
-        { src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=2070&auto=format&fit=crop', alt: t('galleryLabel4'), label: t('galleryLabel4') },
+        { src: '/carpentry-gallery.jpg', alt: t('galleryLabel1'), label: t('galleryLabel1') },
+        { src: '/garden-gallery.jpg', alt: t('galleryLabel2'), label: t('galleryLabel2') },
+        { src: '/painting-gallery.jpg', alt: t('galleryLabel3'), label: t('galleryLabel3') },
+        { src: '/kitchen-gallery.jpg', alt: t('galleryLabel4'), label: t('galleryLabel4') },
     ];
 
     return (
@@ -297,79 +290,6 @@ const Gallery = () => {
                             {/* Label overlay */}
                             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-neutral-900/70 to-transparent px-4 py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                                 <p className="text-white text-xs font-medium">{image.label}</p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-};
-
-// ─── Reviews ──────────────────────────────────────────────────────────────────
-const Reviews = () => {
-    const { t } = useLanguage();
-    const reviews = [
-        {
-            name: 'Sarah J.',
-            location: 'Ely',
-            rating: 5,
-            text: t('review1Text'),
-            date: t('review1Date'),
-        },
-        {
-            name: 'James Wilson',
-            location: 'Soham',
-            rating: 5,
-            text: t('review2Text'),
-            date: t('review2Date'),
-        },
-        {
-            name: 'Emily R.',
-            location: 'Cambridge',
-            rating: 5,
-            text: t('review3Text'),
-            date: t('review3Date'),
-        },
-    ];
-
-    return (
-        <section id="reviews" className="min-h-screen flex flex-col justify-center py-24 bg-neutral-900 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">
-                        {t('reviewsTitle')}
-                    </h2>
-                    <div className="flex items-center justify-center gap-1.5 text-amber-400 mb-2">
-                        {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
-                    </div>
-                    <p className="text-neutral-400 text-lg">{t('reviewsSubtitle')}</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {reviews.map((rev, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
-                            className="bg-white/5 border border-white/10 p-8 rounded-3xl flex flex-col h-full"
-                        >
-                            <div className="flex gap-1 text-amber-400 mb-5">
-                                {[...Array(rev.rating)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
-                            </div>
-                            <p className="text-white/90 font-light leading-relaxed mb-8 flex-grow italic">
-                                "{rev.text}"
-                            </p>
-                            <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center text-white text-xs font-bold">
-                                    {rev.name.charAt(0)}
-                                </div>
-                                <div>
-                                    <p className="text-white font-medium text-sm">{rev.name}</p>
-                                    <p className="text-neutral-500 text-xs">{rev.location} · {rev.date}</p>
-                                </div>
                             </div>
                         </motion.div>
                     ))}
@@ -438,7 +358,7 @@ const Services = () => {
                             className="group p-8 bg-white border border-neutral-100 rounded-3xl hover:shadow-xl hover:shadow-neutral-200/40 transition-all duration-300"
                         >
                             <div className="w-14 h-14 rounded-2xl bg-neutral-50 flex items-center justify-center mb-6 group-hover:bg-neutral-900 group-hover:text-white transition-colors">
-                                {React.cloneElement(service.icon as React.ReactElement, { size: 24 })}
+                                {React.cloneElement(service.icon as React.ReactElement<any>, { size: 24 })}
                             </div>
                             <h3 className="text-xl font-medium text-neutral-900 mb-3">{service.title}</h3>
                             <p className="text-neutral-500 font-light leading-relaxed text-sm">{service.desc}</p>
@@ -678,7 +598,7 @@ const Contact = () => {
                         </div>
                         <div className="bg-[#faf9f6] rounded-2xl p-6 border border-neutral-100">
                             <p className="text-sm font-semibold text-neutral-900 mb-3">{t('contactWhyChooseUsTitle')}</p>
-                            {[t('contactWhyChooseUs1'), t('contactWhyChooseUs2'), t('contactWhyChooseUs3'), t('contactWhyChooseUs4')].map((item) => (
+                            {[t('contactWhyChooseUs1'), t('contactWhyChooseUs2'), t('contactWhyChooseUs3')].map((item) => (
                                 <div key={item} className="flex items-center gap-2.5 mb-2.5 last:mb-0">
                                     <CheckCircle2 size={15} className="text-emerald-500 shrink-0" />
                                     <span className="text-sm text-neutral-600">{item}</span>
@@ -770,7 +690,7 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
                     <div className="max-w-2xl">
-                        <p className="font-serif text-2xl font-semibold mb-4">Fenland Property Maintenance.</p>
+                        <p className="font-serif text-2xl font-semibold mb-4">B.F.O Property Maintenance.</p>
                         <p className="text-neutral-400 font-light text-sm leading-relaxed">{t('footerDesc')}</p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
@@ -785,14 +705,14 @@ const Footer = () => {
                 </div>
                 <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6 text-neutral-500">
                     <p className="text-[11px] tracking-wide italic">
-                        © {new Date().getFullYear()} Fenland Property Maintenance. {t('footerRights')}
+                        © {new Date().getFullYear()} B.F.O Property Maintenance. {t('footerRights')}
                     </p>
                     <div className="flex items-center gap-8">
                         <div className="flex items-center gap-4 border-r border-white/10 pr-8 mr-0">
-                            <a href="https://www.instagram.com/globalinsightpartners.oficial/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
                                 <Instagram size={16} />
                             </a>
-                            <a href="https://www.facebook.com/people/Globalinsightpartners/61570809805072/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook">
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook">
                                 <Facebook size={16} />
                             </a>
                         </div>
@@ -817,7 +737,7 @@ const WhatsAppButton = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-2xl hover:bg-[#22c35e] transition-all group"
+            className="hidden fixed bottom-8 right-8 z-50 items-center gap-3 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-2xl hover:bg-[#22c35e] transition-all group"
             aria-label={t('whatsappAriaLabel')}
         >
             <div className="relative">
@@ -842,7 +762,7 @@ const App = () => {
                 <HowItWorks />
                 <LandlordCTA />
                 <Gallery />
-                <Reviews />
+
                 <Services />
                 <ServiceArea />
                 <Contact />
